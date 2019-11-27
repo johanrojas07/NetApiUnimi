@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BDMasivasModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="nrc" />
+          </Key>
+          <Property Name="nrc" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'BDMasivas.dbo.Materia_Estudiante' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Materia_Estudiante">
+          <Key>
+            <PropertyRef Name="nrc" />
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="nrc" Type="int" Nullable="false" />
+          <Property Name="codigo" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Materia_Estudiante_Estudiante">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="Materia_Estudiante" Type="Self.Materia_Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="Materia_Estudiante">
+              <PropertyRef Name="codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDMasivasModelStoreContainer">
+          <EntitySet Name="Estudiante" EntityType="Self.Estudiante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Materia_Estudiante" EntityType="Self.Materia_Estudiante" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Materia_Estudiante].[nrc] AS [nrc], 
+    [Materia_Estudiante].[codigo] AS [codigo]
+    FROM [dbo].[Materia_Estudiante] AS [Materia_Estudiante]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Materia_Estudiante_Estudiante" Association="Self.FK_Materia_Estudiante_Estudiante">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="Materia_Estudiante" EntitySet="Materia_Estudiante" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDMasivasModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Estudiante">
+          <Key>
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="codigo" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Materia_Estudiante" Relationship="Self.FK_Materia_Estudiante_Estudiante" FromRole="Estudiante" ToRole="Materia_Estudiante" />
+        </EntityType>
+        <EntityType Name="Materia">
+          <Key>
+            <PropertyRef Name="nrc" />
+          </Key>
+          <Property Name="nrc" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Materia_Estudiante">
+          <Key>
+            <PropertyRef Name="nrc" />
+            <PropertyRef Name="codigo" />
+          </Key>
+          <Property Name="nrc" Type="Int32" Nullable="false" />
+          <Property Name="codigo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estudiante" Relationship="Self.FK_Materia_Estudiante_Estudiante" FromRole="Materia_Estudiante" ToRole="Estudiante" />
+        </EntityType>
+        <Association Name="FK_Materia_Estudiante_Estudiante">
+          <End Role="Estudiante" Type="Self.Estudiante" Multiplicity="1" />
+          <End Role="Materia_Estudiante" Type="Self.Materia_Estudiante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estudiante">
+              <PropertyRef Name="codigo" />
+            </Principal>
+            <Dependent Role="Materia_Estudiante">
+              <PropertyRef Name="codigo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDMasivasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Estudiante" EntityType="Self.Estudiante" />
+          <EntitySet Name="Materia" EntityType="Self.Materia" />
+          <EntitySet Name="Materia_Estudiante" EntityType="Self.Materia_Estudiante" />
+          <AssociationSet Name="FK_Materia_Estudiante_Estudiante" Association="Self.FK_Materia_Estudiante_Estudiante">
+            <End Role="Estudiante" EntitySet="Estudiante" />
+            <End Role="Materia_Estudiante" EntitySet="Materia_Estudiante" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDMasivasModelStoreContainer" CdmEntityContainer="BDMasivasEntities">
+          <EntitySetMapping Name="Estudiante">
+            <EntityTypeMapping TypeName="BDMasivasModel.Estudiante">
+              <MappingFragment StoreEntitySet="Estudiante">
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materia">
+            <EntityTypeMapping TypeName="BDMasivasModel.Materia">
+              <MappingFragment StoreEntitySet="Materia">
+                <ScalarProperty Name="nrc" ColumnName="nrc" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Materia_Estudiante">
+            <EntityTypeMapping TypeName="BDMasivasModel.Materia_Estudiante">
+              <MappingFragment StoreEntitySet="Materia_Estudiante">
+                <ScalarProperty Name="nrc" ColumnName="nrc" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
