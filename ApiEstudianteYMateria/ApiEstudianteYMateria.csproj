@@ -164,18 +164,34 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Dtos\MateriaDTO.cs" />
+    <Compile Include="Dtos\EstudianteDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="ModelEstudiante.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEstudiante.Context.tt</DependentUpon>
+    <Compile Include="Models\Estudiante.cs">
+      <DependentUpon>ModelEstudiantesYMaterias.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelEstudiante.Designer.cs">
+    <Compile Include="Models\Estudiantes_Materias.cs">
+      <DependentUpon>ModelEstudiantesYMaterias.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Materia.cs">
+      <DependentUpon>ModelEstudiantesYMaterias.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelEstudiantesYMaterias.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelEstudiante.edmx</DependentUpon>
+      <DependentUpon>ModelEstudiantesYMaterias.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelEstudiantesYMaterias.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelEstudiantesYMaterias.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModelEstudiantesYMaterias.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelEstudiantesYMaterias.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -188,9 +204,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="ModelEstudiante.Context.tt">
+    <Content Include="Models\ModelEstudiantesYMaterias.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelEstudiante.Context.cs</LastGenOutput>
+      <DependentUpon>ModelEstudiantesYMaterias.edmx</DependentUpon>
+      <LastGenOutput>ModelEstudiantesYMaterias.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelEstudiantesYMaterias.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelEstudiantesYMaterias.edmx</DependentUpon>
+      <LastGenOutput>ModelEstudiantesYMaterias.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -213,13 +235,13 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="ModelEstudiante.edmx">
+    <EntityDeploy Include="Models\ModelEstudiantesYMaterias.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelEstudiante.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelEstudiantesYMaterias.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ModelEstudiante.edmx.diagram">
-      <DependentUpon>ModelEstudiante.edmx</DependentUpon>
-    </None>
+    <Content Include="Models\ModelEstudiantesYMaterias.edmx.diagram">
+      <DependentUpon>ModelEstudiantesYMaterias.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -243,7 +265,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

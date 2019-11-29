@@ -7,14 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ApiEstudianteYMateria
+namespace ApiEstudianteYMateria.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Materia
+    public partial class Estudiantes_Materias
     {
+        public int ID { get; set; }
         public int nrc { get; set; }
-        public string descripcion { get; set; }
+        public int codigo { get; set; }
     }
 }

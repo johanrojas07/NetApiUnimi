@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ApiEstudianteYMateria
+namespace ApiEstudianteYMateria.Models
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class BDMasivasEntities : DbContext
+    public partial class Uniminuto3CorteEntities : DbContext
     {
-        public BDMasivasEntities()
-            : base("name=BDMasivasEntities")
+        public Uniminuto3CorteEntities()
+            : base("name=Uniminuto3CorteEntities")
         {
         }
     
@@ -26,7 +26,7 @@ namespace ApiEstudianteYMateria
         }
     
         public virtual DbSet<Estudiante> Estudiante { get; set; }
+        public virtual DbSet<Estudiantes_Materias> Estudiantes_Materias { get; set; }
         public virtual DbSet<Materia> Materia { get; set; }
-        public virtual DbSet<Materia_Estudiante> Materia_Estudiante { get; set; }
     }
 }

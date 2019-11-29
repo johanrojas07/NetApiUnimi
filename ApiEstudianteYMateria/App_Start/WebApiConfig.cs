@@ -13,6 +13,9 @@ namespace ApiEstudianteYMateria
 
             // Rutas de API web
             config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+           name: "MapByAction",
+           routeTemplate: "api/{controller}/{action}/{id}", defaults: new { id = RouteParameter.Optional });
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
